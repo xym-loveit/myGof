@@ -1,0 +1,2605 @@
+<!DOCTYPE html>
+<!-- saved from url=(0155)https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99.html -->
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        
+        <title>面向对象设计原则之迪米特法则 · 设计模式Java版</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        <meta name="author" content="quanke">
+        
+        
+    
+    <link rel="stylesheet" href="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/website(1).css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://gof.quanke.name/gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://gof.quanke.name/gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    
+    
+
+    <link rel="prev" href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99.html"><link rel="next" href="https://gof.quanke.name/%E5%85%AD%E4%B8%AA%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F.html"></head>
+    <body mycollectionplug="bind">
+        
+<div class="book without-animation with-summary font-size-2 font-family-1">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋">
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://www.gitbook.com/book/quanke/design-pattern-java" target="_blank" class="custom-link">设计模式Java版</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="https://gof.quanke.name/">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="基础知识.html">
+            
+                <a href="https://gof.quanke.name/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html">
+            
+                    
+                    基础知识
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="设计模式概述.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.html">
+            
+                    
+                    设计模式概述
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="从招式与内功谈起——设计模式概述（一）.html">
+            
+                <a href="https://gof.quanke.name/%E4%BB%8E%E6%8B%9B%E5%BC%8F%E4%B8%8E%E5%86%85%E5%8A%9F%E8%B0%88%E8%B5%B7%E2%80%94%E2%80%94%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    从招式与内功谈起——设计模式概述（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="从招式与内功谈起——设计模式概述（二）.html">
+            
+                <a href="https://gof.quanke.name/%E4%BB%8E%E6%8B%9B%E5%BC%8F%E4%B8%8E%E5%86%85%E5%8A%9F%E8%B0%88%E8%B5%B7%E2%80%94%E2%80%94%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    从招式与内功谈起——设计模式概述（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="从招式与内功谈起——设计模式概述（三）.html">
+            
+                <a href="https://gof.quanke.name/%E4%BB%8E%E6%8B%9B%E5%BC%8F%E4%B8%8E%E5%86%85%E5%8A%9F%E8%B0%88%E8%B5%B7%E2%80%94%E2%80%94%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    从招式与内功谈起——设计模式概述（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="面向对象设计原则.html">
+            
+                <a href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html">
+            
+                    
+                    面向对象设计原则
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="面向对象设计原则之单一职责原则.html">
+            
+                <a href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99.html">
+            
+                    
+                    面向对象设计原则之单一职责原则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="面向对象设计原则之开闭原则.html">
+            
+                <a href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99.html">
+            
+                    
+                    面向对象设计原则之开闭原则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.3" data-path="面向对象设计原则之里氏代换原则.html">
+            
+                <a href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E9%87%8C%E6%B0%8F%E4%BB%A3%E6%8D%A2%E5%8E%9F%E5%88%99.html">
+            
+                    
+                    面向对象设计原则之里氏代换原则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.4" data-path="面向对象设计原则之依赖倒转原则.html">
+            
+                <a href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99.html">
+            
+                    
+                    面向对象设计原则之依赖倒转原则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.5" data-path="面向对象设计原则之接口隔离原则.html">
+            
+                <a href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99.html">
+            
+                    
+                    面向对象设计原则之接口隔离原则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.6" data-path="面向对象设计原则之合成复用原则.html">
+            
+                <a href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99.html">
+            
+                    
+                    面向对象设计原则之合成复用原则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2.7" data-path="面向对象设计原则之迪米特法则.html">
+            
+                <a href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99.html">
+            
+                    
+                    面向对象设计原则之迪米特法则
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="六个创建型模式.html">
+            
+                <a href="https://gof.quanke.name/%E5%85%AD%E4%B8%AA%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">
+            
+                    
+                    六个创建型模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="简单工厂模式-Simple Factory Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F-Simple%20Factory%20Pattern.html">
+            
+                    
+                    简单工厂模式-Simple Factory Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="工厂三兄弟之简单工厂模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之简单工厂模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="工厂三兄弟之简单工厂模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之简单工厂模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="工厂三兄弟之简单工厂模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之简单工厂模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4" data-path="工厂三兄弟之简单工厂模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之简单工厂模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="工厂方法模式-Factory Method Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F-Factory%20Method%20Pattern.html">
+            
+                    
+                    工厂方法模式-Factory Method Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="工厂三兄弟之工厂方法模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之工厂方法模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="工厂三兄弟之工厂方法模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之工厂方法模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="工厂三兄弟之工厂方法模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之工厂方法模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4" data-path="工厂三兄弟之工厂方法模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之工厂方法模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="抽象工厂模式-Abstract  Factory Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F-Abstract%20%20Factory%20Pattern.html">
+            
+                    
+                    抽象工厂模式-Abstract  Factory Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="工厂三兄弟之抽象工厂模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之抽象工厂模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="工厂三兄弟之抽象工厂模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之抽象工厂模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="工厂三兄弟之抽象工厂模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之抽象工厂模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.4" data-path="工厂三兄弟之抽象工厂模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之抽象工厂模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.5" data-path="工厂三兄弟之抽象工厂模式（五）.html">
+            
+                <a href="https://gof.quanke.name/%E5%B7%A5%E5%8E%82%E4%B8%89%E5%85%84%E5%BC%9F%E4%B9%8B%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    工厂三兄弟之抽象工厂模式（五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="单例模式-Singleton Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-Singleton%20Pattern.html">
+            
+                    
+                    单例模式-Singleton Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1" data-path="确保对象的唯一性——单例模式 （一）.html">
+            
+                <a href="https://gof.quanke.name/%E7%A1%AE%E4%BF%9D%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%94%AF%E4%B8%80%E6%80%A7%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%20%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    确保对象的唯一性——单例模式 （一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.2" data-path="确保对象的唯一性——单例模式 （二）.html">
+            
+                <a href="https://gof.quanke.name/%E7%A1%AE%E4%BF%9D%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%94%AF%E4%B8%80%E6%80%A7%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%20%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    确保对象的唯一性——单例模式 （二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.3" data-path="确保对象的唯一性——单例模式 （三）.html">
+            
+                <a href="https://gof.quanke.name/%E7%A1%AE%E4%BF%9D%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%94%AF%E4%B8%80%E6%80%A7%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%20%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    确保对象的唯一性——单例模式 （三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.4" data-path="确保对象的唯一性——单例模式 （四）.html">
+            
+                <a href="https://gof.quanke.name/%E7%A1%AE%E4%BF%9D%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%94%AF%E4%B8%80%E6%80%A7%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%20%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    确保对象的唯一性——单例模式 （四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.5" data-path="确保对象的唯一性——单例模式 （五）.html">
+            
+                <a href="https://gof.quanke.name/%E7%A1%AE%E4%BF%9D%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%94%AF%E4%B8%80%E6%80%A7%E2%80%94%E2%80%94%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%20%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    确保对象的唯一性——单例模式 （五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="原型模式-Prototype Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F-Prototype%20Pattern.html">
+            
+                    
+                    原型模式-Prototype Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.5.1" data-path="对象的克隆——原型模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%8B%E9%9A%86%E2%80%94%E2%80%94%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    对象的克隆——原型模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.2" data-path="对象的克隆——原型模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%8B%E9%9A%86%E2%80%94%E2%80%94%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    对象的克隆——原型模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.3" data-path="对象的克隆——原型模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%8B%E9%9A%86%E2%80%94%E2%80%94%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    对象的克隆——原型模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.4" data-path="对象的克隆——原型模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%8B%E9%9A%86%E2%80%94%E2%80%94%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    对象的克隆——原型模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="建造者模式-Builder Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F-Builder%20Pattern.html">
+            
+                    
+                    建造者模式-Builder Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.6.1" data-path="复杂对象的组装与创建——建造者模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%8D%E6%9D%82%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%84%E8%A3%85%E4%B8%8E%E5%88%9B%E5%BB%BA%E2%80%94%E2%80%94%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    复杂对象的组装与创建——建造者模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6.2" data-path="复杂对象的组装与创建——建造者模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%8D%E6%9D%82%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%84%E8%A3%85%E4%B8%8E%E5%88%9B%E5%BB%BA%E2%80%94%E2%80%94%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    复杂对象的组装与创建——建造者模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6.3" data-path="复杂对象的组装与创建——建造者模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%8D%E6%9D%82%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%84%E8%A3%85%E4%B8%8E%E5%88%9B%E5%BB%BA%E2%80%94%E2%80%94%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    复杂对象的组装与创建——建造者模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="七个结构型模式.html">
+            
+                <a href="https://gof.quanke.name/%E4%B8%83%E4%B8%AA%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">
+            
+                    
+                    七个结构型模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="适配器模式-Adapter Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F-Adapter%20Pattern.html">
+            
+                    
+                    适配器模式-Adapter Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="不兼容结构的协调——适配器模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E4%B8%8D%E5%85%BC%E5%AE%B9%E7%BB%93%E6%9E%84%E7%9A%84%E5%8D%8F%E8%B0%83%E2%80%94%E2%80%94%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    不兼容结构的协调——适配器模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="不兼容结构的协调——适配器模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E4%B8%8D%E5%85%BC%E5%AE%B9%E7%BB%93%E6%9E%84%E7%9A%84%E5%8D%8F%E8%B0%83%E2%80%94%E2%80%94%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    不兼容结构的协调——适配器模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="不兼容结构的协调——适配器模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E4%B8%8D%E5%85%BC%E5%AE%B9%E7%BB%93%E6%9E%84%E7%9A%84%E5%8D%8F%E8%B0%83%E2%80%94%E2%80%94%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    不兼容结构的协调——适配器模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.4" data-path="不兼容结构的协调——适配器模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E4%B8%8D%E5%85%BC%E5%AE%B9%E7%BB%93%E6%9E%84%E7%9A%84%E5%8D%8F%E8%B0%83%E2%80%94%E2%80%94%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    不兼容结构的协调——适配器模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="桥接模式-Bridge Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F-Bridge%20Pattern.html">
+            
+                    
+                    桥接模式-Bridge Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="处理多维度变化——桥接模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%B4%E5%BA%A6%E5%8F%98%E5%8C%96%E2%80%94%E2%80%94%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    处理多维度变化——桥接模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="处理多维度变化——桥接模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%B4%E5%BA%A6%E5%8F%98%E5%8C%96%E2%80%94%E2%80%94%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    处理多维度变化——桥接模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="处理多维度变化——桥接模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%B4%E5%BA%A6%E5%8F%98%E5%8C%96%E2%80%94%E2%80%94%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    处理多维度变化——桥接模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="处理多维度变化——桥接模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%B4%E5%BA%A6%E5%8F%98%E5%8C%96%E2%80%94%E2%80%94%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    处理多维度变化——桥接模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="组合模式-Composite Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F-Composite%20Pattern.html">
+            
+                    
+                    组合模式-Composite Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="树形结构的处理——组合模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E7%9A%84%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    树形结构的处理——组合模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="树形结构的处理——组合模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E7%9A%84%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    树形结构的处理——组合模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="树形结构的处理——组合模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E7%9A%84%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    树形结构的处理——组合模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4" data-path="树形结构的处理——组合模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E7%9A%84%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    树形结构的处理——组合模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.5" data-path="树形结构的处理——组合模式（五）.html">
+            
+                <a href="https://gof.quanke.name/%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E7%9A%84%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    树形结构的处理——组合模式（五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="装饰模式-Decorator Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F-Decorator%20Pattern.html">
+            
+                    
+                    装饰模式-Decorator Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="扩展系统功能——装饰模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E6%89%A9%E5%B1%95%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E2%80%94%E2%80%94%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    扩展系统功能——装饰模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="扩展系统功能——装饰模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E6%89%A9%E5%B1%95%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E2%80%94%E2%80%94%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    扩展系统功能——装饰模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="扩展系统功能——装饰模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E6%89%A9%E5%B1%95%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E2%80%94%E2%80%94%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    扩展系统功能——装饰模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.4" data-path="扩展系统功能——装饰模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E6%89%A9%E5%B1%95%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E2%80%94%E2%80%94%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    扩展系统功能——装饰模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="外观模式-Facade Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F-Facade%20Pattern.html">
+            
+                    
+                    外观模式-Facade Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="深入浅出外观模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    深入浅出外观模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.2" data-path="深入浅出外观模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    深入浅出外观模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.3" data-path="深入浅出外观模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    深入浅出外观模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="享元模式-Flyweight Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F-Flyweight%20Pattern.html">
+            
+                    
+                    享元模式-Flyweight Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.6.1" data-path="实现对象的复用——享元模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%8D%E7%94%A8%E2%80%94%E2%80%94%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    实现对象的复用——享元模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6.2" data-path="实现对象的复用——享元模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%8D%E7%94%A8%E2%80%94%E2%80%94%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    实现对象的复用——享元模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6.3" data-path="实现对象的复用——享元模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%8D%E7%94%A8%E2%80%94%E2%80%94%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    实现对象的复用——享元模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6.4" data-path="实现对象的复用——享元模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%8D%E7%94%A8%E2%80%94%E2%80%94%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    实现对象的复用——享元模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6.5" data-path="实现对象的复用——享元模式（五）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%8D%E7%94%A8%E2%80%94%E2%80%94%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    实现对象的复用——享元模式（五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="代理模式-Proxy Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F-Proxy%20Pattern.html">
+            
+                    
+                    代理模式-Proxy Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.7.1" data-path="设计模式之代理模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    设计模式之代理模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.2" data-path="设计模式之代理模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    设计模式之代理模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.3" data-path="设计模式之代理模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    设计模式之代理模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.4" data-path="设计模式之代理模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    设计模式之代理模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="十一个行为型模式.html">
+            
+                <a href="https://gof.quanke.name/%E5%8D%81%E4%B8%80%E4%B8%AA%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">
+            
+                    
+                    十一个行为型模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="职责链模式-Chain of Responsibility Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F-Chain%20of%20Responsibility%20Pattern.html">
+            
+                    
+                    职责链模式-Chain of Responsibility Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="请求的链式处理——职责链模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AF%B7%E6%B1%82%E7%9A%84%E9%93%BE%E5%BC%8F%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    请求的链式处理——职责链模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="请求的链式处理——职责链模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AF%B7%E6%B1%82%E7%9A%84%E9%93%BE%E5%BC%8F%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    请求的链式处理——职责链模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="请求的链式处理——职责链模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AF%B7%E6%B1%82%E7%9A%84%E9%93%BE%E5%BC%8F%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    请求的链式处理——职责链模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="请求的链式处理——职责链模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AF%B7%E6%B1%82%E7%9A%84%E9%93%BE%E5%BC%8F%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    请求的链式处理——职责链模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="命令模式-Command Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F-Command%20Pattern.html">
+            
+                    
+                    命令模式-Command Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="请求发送者与接收者解耦——命令模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81%E8%80%85%E4%B8%8E%E6%8E%A5%E6%94%B6%E8%80%85%E8%A7%A3%E8%80%A6%E2%80%94%E2%80%94%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    请求发送者与接收者解耦——命令模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="请求发送者与接收者解耦——命令模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81%E8%80%85%E4%B8%8E%E6%8E%A5%E6%94%B6%E8%80%85%E8%A7%A3%E8%80%A6%E2%80%94%E2%80%94%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    请求发送者与接收者解耦——命令模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.3" data-path="请求发送者与接收者解耦——命令模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81%E8%80%85%E4%B8%8E%E6%8E%A5%E6%94%B6%E8%80%85%E8%A7%A3%E8%80%A6%E2%80%94%E2%80%94%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    请求发送者与接收者解耦——命令模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.4" data-path="请求发送者与接收者解耦——命令模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81%E8%80%85%E4%B8%8E%E6%8E%A5%E6%94%B6%E8%80%85%E8%A7%A3%E8%80%A6%E2%80%94%E2%80%94%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    请求发送者与接收者解耦——命令模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.5" data-path="请求发送者与接收者解耦——命令模式（五）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81%E8%80%85%E4%B8%8E%E6%8E%A5%E6%94%B6%E8%80%85%E8%A7%A3%E8%80%A6%E2%80%94%E2%80%94%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    请求发送者与接收者解耦——命令模式（五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.6" data-path="请求发送者与接收者解耦——命令模式（六）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81%E8%80%85%E4%B8%8E%E6%8E%A5%E6%94%B6%E8%80%85%E8%A7%A3%E8%80%A6%E2%80%94%E2%80%94%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%85%AD%EF%BC%89.html">
+            
+                    
+                    请求发送者与接收者解耦——命令模式（六）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="解释器模式-Interpreter Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F-Interpreter%20Pattern.html">
+            
+                    
+                    解释器模式-Interpreter Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="自定义语言的实现——解释器模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    自定义语言的实现——解释器模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="自定义语言的实现——解释器模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    自定义语言的实现——解释器模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.3" data-path="自定义语言的实现——解释器模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    自定义语言的实现——解释器模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.4" data-path="自定义语言的实现——解释器模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    自定义语言的实现——解释器模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.5" data-path="自定义语言的实现——解释器模式（五）.html">
+            
+                <a href="https://gof.quanke.name/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    自定义语言的实现——解释器模式（五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.6" data-path="自定义语言的实现——解释器模式（六）.html">
+            
+                <a href="https://gof.quanke.name/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%85%AD%EF%BC%89.html">
+            
+                    
+                    自定义语言的实现——解释器模式（六）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="迭代器模式-Iterator Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F-Iterator%20Pattern.html">
+            
+                    
+                    迭代器模式-Iterator Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="遍历聚合对象中的元素——迭代器模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E9%81%8D%E5%8E%86%E8%81%9A%E5%90%88%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E2%80%94%E2%80%94%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    遍历聚合对象中的元素——迭代器模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="遍历聚合对象中的元素——迭代器模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E9%81%8D%E5%8E%86%E8%81%9A%E5%90%88%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E2%80%94%E2%80%94%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    遍历聚合对象中的元素——迭代器模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="遍历聚合对象中的元素——迭代器模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E9%81%8D%E5%8E%86%E8%81%9A%E5%90%88%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E2%80%94%E2%80%94%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    遍历聚合对象中的元素——迭代器模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.4" data-path="遍历聚合对象中的元素——迭代器模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E9%81%8D%E5%8E%86%E8%81%9A%E5%90%88%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E2%80%94%E2%80%94%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    遍历聚合对象中的元素——迭代器模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.5" data-path="遍历聚合对象中的元素——迭代器模式（五）.html">
+            
+                <a href="https://gof.quanke.name/%E9%81%8D%E5%8E%86%E8%81%9A%E5%90%88%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E2%80%94%E2%80%94%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    遍历聚合对象中的元素——迭代器模式（五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.6" data-path="遍历聚合对象中的元素——迭代器模式（六）.html">
+            
+                <a href="https://gof.quanke.name/%E9%81%8D%E5%8E%86%E8%81%9A%E5%90%88%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E2%80%94%E2%80%94%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%85%AD%EF%BC%89.html">
+            
+                    
+                    遍历聚合对象中的元素——迭代器模式（六）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="中介者模式-Mediator Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F-Mediator%20Pattern.html">
+            
+                    
+                    中介者模式-Mediator Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.5.1" data-path="协调多个对象之间的交互——中介者模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%8D%8F%E8%B0%83%E5%A4%9A%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BA%A4%E4%BA%92%E2%80%94%E2%80%94%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    协调多个对象之间的交互——中介者模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5.2" data-path="协调多个对象之间的交互——中介者模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%8D%8F%E8%B0%83%E5%A4%9A%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BA%A4%E4%BA%92%E2%80%94%E2%80%94%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    协调多个对象之间的交互——中介者模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5.3" data-path="协调多个对象之间的交互——中介者模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E5%8D%8F%E8%B0%83%E5%A4%9A%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BA%A4%E4%BA%92%E2%80%94%E2%80%94%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    协调多个对象之间的交互——中介者模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5.4" data-path="协调多个对象之间的交互——中介者模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E5%8D%8F%E8%B0%83%E5%A4%9A%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BA%A4%E4%BA%92%E2%80%94%E2%80%94%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    协调多个对象之间的交互——中介者模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5.5" data-path="协调多个对象之间的交互——中介者模式（五）.html">
+            
+                <a href="https://gof.quanke.name/%E5%8D%8F%E8%B0%83%E5%A4%9A%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BA%A4%E4%BA%92%E2%80%94%E2%80%94%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    协调多个对象之间的交互——中介者模式（五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="备忘录模式-Memento Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F-Memento%20Pattern.html">
+            
+                    
+                    备忘录模式-Memento Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.6.1" data-path="撤销功能的实现——备忘录模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E6%92%A4%E9%94%80%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    撤销功能的实现——备忘录模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6.2" data-path="撤销功能的实现——备忘录模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E6%92%A4%E9%94%80%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    撤销功能的实现——备忘录模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6.3" data-path="撤销功能的实现——备忘录模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E6%92%A4%E9%94%80%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    撤销功能的实现——备忘录模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6.4" data-path="撤销功能的实现——备忘录模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E6%92%A4%E9%94%80%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    撤销功能的实现——备忘录模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6.5" data-path="撤销功能的实现——备忘录模式（五）.html">
+            
+                <a href="https://gof.quanke.name/%E6%92%A4%E9%94%80%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    撤销功能的实现——备忘录模式（五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="观察者模式-Observer Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F-Observer%20Pattern.html">
+            
+                    
+                    观察者模式-Observer Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.7.1" data-path="对象间的联动——观察者模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AF%B9%E8%B1%A1%E9%97%B4%E7%9A%84%E8%81%94%E5%8A%A8%E2%80%94%E2%80%94%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    对象间的联动——观察者模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7.2" data-path="对象间的联动——观察者模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AF%B9%E8%B1%A1%E9%97%B4%E7%9A%84%E8%81%94%E5%8A%A8%E2%80%94%E2%80%94%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    对象间的联动——观察者模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7.3" data-path="对象间的联动——观察者模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AF%B9%E8%B1%A1%E9%97%B4%E7%9A%84%E8%81%94%E5%8A%A8%E2%80%94%E2%80%94%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    对象间的联动——观察者模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7.4" data-path="对象间的联动——观察者模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AF%B9%E8%B1%A1%E9%97%B4%E7%9A%84%E8%81%94%E5%8A%A8%E2%80%94%E2%80%94%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    对象间的联动——观察者模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7.5" data-path="对象间的联动——观察者模式（五）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AF%B9%E8%B1%A1%E9%97%B4%E7%9A%84%E8%81%94%E5%8A%A8%E2%80%94%E2%80%94%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    对象间的联动——观察者模式（五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7.6" data-path="对象间的联动——观察者模式（六）.html">
+            
+                <a href="https://gof.quanke.name/%E5%AF%B9%E8%B1%A1%E9%97%B4%E7%9A%84%E8%81%94%E5%8A%A8%E2%80%94%E2%80%94%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%85%AD%EF%BC%89.html">
+            
+                    
+                    对象间的联动——观察者模式（六）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="状态模式-State Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F-State%20Pattern.html">
+            
+                    
+                    状态模式-State Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.8.1" data-path="处理对象的多种状态及其相互转换——状态模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%84%E7%90%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%9A%E7%A7%8D%E7%8A%B6%E6%80%81%E5%8F%8A%E5%85%B6%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2%E2%80%94%E2%80%94%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    处理对象的多种状态及其相互转换——状态模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8.2" data-path="处理对象的多种状态及其相互转换——状态模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%84%E7%90%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%9A%E7%A7%8D%E7%8A%B6%E6%80%81%E5%8F%8A%E5%85%B6%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2%E2%80%94%E2%80%94%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    处理对象的多种状态及其相互转换——状态模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8.3" data-path="处理对象的多种状态及其相互转换——状态模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%84%E7%90%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%9A%E7%A7%8D%E7%8A%B6%E6%80%81%E5%8F%8A%E5%85%B6%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2%E2%80%94%E2%80%94%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    处理对象的多种状态及其相互转换——状态模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8.4" data-path="处理对象的多种状态及其相互转换——状态模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%84%E7%90%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%9A%E7%A7%8D%E7%8A%B6%E6%80%81%E5%8F%8A%E5%85%B6%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2%E2%80%94%E2%80%94%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    处理对象的多种状态及其相互转换——状态模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8.5" data-path="处理对象的多种状态及其相互转换——状态模式（五）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%84%E7%90%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%9A%E7%A7%8D%E7%8A%B6%E6%80%81%E5%8F%8A%E5%85%B6%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2%E2%80%94%E2%80%94%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89.html">
+            
+                    
+                    处理对象的多种状态及其相互转换——状态模式（五）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8.6" data-path="处理对象的多种状态及其相互转换——状态模式（六）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%84%E7%90%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%9A%E7%A7%8D%E7%8A%B6%E6%80%81%E5%8F%8A%E5%85%B6%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2%E2%80%94%E2%80%94%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%85%AD%EF%BC%89.html">
+            
+                    
+                    处理对象的多种状态及其相互转换——状态模式（六）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="策略模式-Strategy Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F-Strategy%20Pattern.html">
+            
+                    
+                    策略模式-Strategy Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.9.1" data-path="算法的封装与切换——策略模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E7%AE%97%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E5%88%87%E6%8D%A2%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    算法的封装与切换——策略模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9.2" data-path="算法的封装与切换——策略模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E7%AE%97%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E5%88%87%E6%8D%A2%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    算法的封装与切换——策略模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9.3" data-path="算法的封装与切换——策略模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E7%AE%97%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E5%88%87%E6%8D%A2%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    算法的封装与切换——策略模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9.4" data-path="算法的封装与切换——策略模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E7%AE%97%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E5%88%87%E6%8D%A2%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    算法的封装与切换——策略模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="模板方法模式-Template Method Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F-Template%20Method%20Pattern.html">
+            
+                    
+                    模板方法模式-Template Method Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.10.1" data-path="模板方法模式深度解析（一）.html">
+            
+                <a href="https://gof.quanke.name/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    模板方法模式深度解析（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10.2" data-path="模板方法模式深度解析（二）.html">
+            
+                <a href="https://gof.quanke.name/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    模板方法模式深度解析（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10.3" data-path="模板方法模式深度解析（三）.html">
+            
+                <a href="https://gof.quanke.name/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    模板方法模式深度解析（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="访问者模式-Visitor Pattern.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F-Visitor%20Pattern.html">
+            
+                    
+                    访问者模式-Visitor Pattern
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.11.1" data-path="操作复杂对象结构——访问者模式（一）.html">
+            
+                <a href="https://gof.quanke.name/%E6%93%8D%E4%BD%9C%E5%A4%8D%E6%9D%82%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    操作复杂对象结构——访问者模式（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.2" data-path="操作复杂对象结构——访问者模式（二）.html">
+            
+                <a href="https://gof.quanke.name/%E6%93%8D%E4%BD%9C%E5%A4%8D%E6%9D%82%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    操作复杂对象结构——访问者模式（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.3" data-path="操作复杂对象结构——访问者模式（三）.html">
+            
+                <a href="https://gof.quanke.name/%E6%93%8D%E4%BD%9C%E5%A4%8D%E6%9D%82%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    操作复杂对象结构——访问者模式（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.4" data-path="操作复杂对象结构——访问者模式（四）.html">
+            
+                <a href="https://gof.quanke.name/%E6%93%8D%E4%BD%9C%E5%A4%8D%E6%9D%82%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    操作复杂对象结构——访问者模式（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="设计模式趣味学习（复习）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%B6%A3%E5%91%B3%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%A4%8D%E4%B9%A0%EF%BC%89.html">
+            
+                    
+                    设计模式趣味学习（复习）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="设计模式与足球（一）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%B6%B3%E7%90%83%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    设计模式与足球（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="设计模式与足球（二）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%B6%B3%E7%90%83%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    设计模式与足球（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="设计模式与足球（三）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%B6%B3%E7%90%83%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    设计模式与足球（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="设计模式与足球（四）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%B6%B3%E7%90%83%EF%BC%88%E5%9B%9B%EF%BC%89.html">
+            
+                    
+                    设计模式与足球（四）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="设计模式综合应用实例.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B.html">
+            
+                    
+                    设计模式综合应用实例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="多人联机射击游戏.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%9A%E4%BA%BA%E8%81%94%E6%9C%BA%E5%B0%84%E5%87%BB%E6%B8%B8%E6%88%8F.html">
+            
+                    
+                    多人联机射击游戏
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="多人联机射击游戏中的设计模式应用（一）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%9A%E4%BA%BA%E8%81%94%E6%9C%BA%E5%B0%84%E5%87%BB%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    多人联机射击游戏中的设计模式应用（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.2" data-path="多人联机射击游戏中的设计模式应用（二）.html">
+            
+                <a href="https://gof.quanke.name/%E5%A4%9A%E4%BA%BA%E8%81%94%E6%9C%BA%E5%B0%84%E5%87%BB%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    多人联机射击游戏中的设计模式应用（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="数据库同步系统.html">
+            
+                <a href="https://gof.quanke.name/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F.html">
+            
+                    
+                    数据库同步系统
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="设计模式综合实例分析之数据库同步系统（一）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%BB%BC%E5%90%88%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89.html">
+            
+                    
+                    设计模式综合实例分析之数据库同步系统（一）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="设计模式综合实例分析之数据库同步系统（二）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%BB%BC%E5%90%88%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%BA%8C%EF%BC%89.html">
+            
+                    
+                    设计模式综合实例分析之数据库同步系统（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="设计模式综合实例分析之数据库同步系统（三）.html">
+            
+                <a href="https://gof.quanke.name/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%BB%BC%E5%90%88%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%89%EF%BC%89.html">
+            
+                    
+                    设计模式综合实例分析之数据库同步系统（三）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com/" target="blank" class="gitbook-link">
+            本書使用 GitBook 釋出
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <a class="btn pull-left js-toolbar-action" aria-label="" href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99.html#"><i class="fa fa-align-justify"></i></a><a class="btn pull-right js-toolbar-action" aria-label="GitHub" href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99.html#"><i class="fa fa-github"></i></a><div class="dropdown pull-right js-toolbar-action"><a class="btn toggle-dropdown" aria-label="Share" href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99.html#"><i class="fa fa-share-alt"></i></a><div class="dropdown-menu dropdown-left"><div class="dropdown-caret"><span class="caret-outer"></span><span class="caret-inner"></span></div><div class="buttons"><button class="button size-5 ">Facebook</button><button class="button size-5 ">Google+</button><button class="button size-5 ">Twitter</button><button class="button size-5 ">Weibo</button><button class="button size-5 ">Instapaper</button></div></div></div><a class="btn pull-right js-toolbar-action" aria-label="" href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99.html#"><i class="fa fa-facebook"></i></a><a class="btn pull-right js-toolbar-action" aria-label="" href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99.html#"><i class="fa fa-twitter"></i></a><div class="dropdown pull-left font-settings js-toolbar-action"><a class="btn toggle-dropdown" aria-label="Font Settings" href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99.html#"><i class="fa fa-font"></i></a><div class="dropdown-menu dropdown-right"><div class="dropdown-caret"><span class="caret-outer"></span><span class="caret-inner"></span></div><div class="buttons"><button class="button size-2 font-reduce">A</button><button class="button size-2 font-enlarge">A</button></div><div class="buttons"><button class="button size-2 ">Serif</button><button class="button size-2 ">Sans</button></div><div class="buttons"><button class="button size-3 ">White</button><button class="button size-3 ">Sepia</button><button class="button size-3 ">Night</button></div></div></div><h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="https://gof.quanke.name/">面向对象设计原则之迪米特法则</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="面向对象设计原则之迪米特法则">面向对象设计原则之迪米特法则</h1>
+<p class="comments-section">迪米特法则来自于1987年美国东北大学(Northeastern University)一个名为“Demeter”的研究项目。迪米特法则又称为最少知识原则(LeastKnowledge Principle, LKP)，其定义如下：<div class="comments-icon"><div class="marker">+</div></div></p>
+<blockquote>
+<p class="comments-section">迪米特法则(Law of  Demeter, LoD)：一个软件实体应当尽可能少地与其他实体发生相互作用。<div class="comments-icon"><div class="marker">+</div></div></p>
+</blockquote>
+<p class="comments-section">如果一个系统符合迪米特法则，那么当其中某一个模块发生修改时，就会尽量少地影响其他模块，扩展会相对容易，这是对软件实体之间通信的限制，迪米特法则要求限制软件实体之间通信的宽度和深度。迪米特法则可降低系统的耦合度，使类与类之间保持松散的耦合关系。<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">迪米特法则还有几种定义形式，包括：不要和“陌生人”说话、只与你的直接朋友通信等，在迪米特法则中，对于一个对象，其朋友包括以下几类：<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">(1) 当前对象本身(this)；<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">(2) 以参数形式传入到当前对象方法中的对象；<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">(3) 当前对象的成员对象；<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">(4) 如果当前对象的成员对象是一个集合，那么集合中的元素也都是朋友；<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">(5) 当前对象所创建的对象。<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">任何一个对象，如果满足上面的条件之一，就是当前对象的“朋友”，否则就是“陌生人”。在应用迪米特法则时，一个对象只能与直接朋友发生交互，不要与“陌生人”发生直接交互，这样做可以降低系统的耦合度，一个对象的改变不会给太多其他对象带来影响。<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">迪米特法则要求我们在设计系统时，应该尽量减少对象之间的交互，如果两个对象之间不必彼此直接通信，那么这两个对象就不应当发生任何直接的相互作用，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以通过第三者转发这个调用。简言之，就是通过引入一个合理的第三者来降低现有对象之间的耦合度。<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">在将迪米特法则运用到系统设计中时，要注意下面的几点：在类的划分上，应当尽量创建松耦合的类，类之间的耦合度越低，就越有利于复用，一个处在松耦合中的类一旦被修改，不会对关联的类造成太大波及；在类的结构设计上，每一个类都应当尽量降低其成员变量和成员函数的访问权限；在类的设计上，只要有可能，一个类型应当设计成不变类；在对其他类的引用上，一个对象对其他对象的引用应当降到最低。<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">下面通过一个简单实例来加深对迪米特法则的理解：<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">Sunny软件公司所开发CRM系统包含很多业务操作窗口，在这些窗口中，某些界面控件之间存在复杂的交互关系，一个控件事件的触发将导致多个其他界面控件产生响应，例如，当一个按钮(Button)被单击时，对应的列表框(List)、组合框(ComboBox)、文本框(TextBox)、文本标签(Label)等都将发生改变，在初始设计方案中，界面控件之间的交互关系可简化为如图1所示结构：<div class="comments-icon"><div class="marker">+</div></div></p>
+<p><img src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/1336930654_2743.jpg" alt=""></p>
+<p class="comments-section">图1 初始设计方案结构图<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">在图1中，由于界面控件之间的交互关系复杂，导致在该窗口中增加新的界面控件时需要修改与之交互的其他控件的源代码，系统扩展性较差，也不便于增加和删除新控件。<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">现使用迪米特对其进行重构。<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">在本实例中，可以通过引入一个专门用于控制界面控件交互的中间类(Mediator)来降低界面控件之间的耦合度。引入中间类之后，界面控件之间不再发生直接引用，而是将请求先转发给中间类，再由中间类来完成对其他控件的调用。当需要增加或删除新的控件时，只需修改中间类即可，无须修改新增控件或已有控件的源代码，重构后结构如图2所示：<div class="comments-icon"><div class="marker">+</div></div></p>
+<p><img src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/1336930673_6550.jpg" alt=""></p>
+<p class="comments-section">图2  重构后的结构图<div class="comments-icon"><div class="marker">+</div></div></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class="search-results-count"></span> results matching "<span class="search-query"></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class="search-query"></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="https://gof.quanke.name/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B9%8B%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99.html" class="navigation navigation-prev " aria-label="Previous page: 面向对象设计原则之合成复用原则">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="https://gof.quanke.name/%E5%85%AD%E4%B8%AA%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F.html" class="navigation navigation-next " aria-label="Next page: 六个创建型模式" style="margin-right: 17px;">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"面向对象设计原则之迪米特法则","level":"1.2.2.7","depth":3,"next":{"title":"六个创建型模式","level":"1.3","depth":1,"path":"六个创建型模式.md","ref":"六个创建型模式.md","articles":[{"title":"简单工厂模式-Simple Factory Pattern","level":"1.3.1","depth":2,"path":"简单工厂模式-Simple Factory Pattern.md","ref":"简单工厂模式-Simple Factory Pattern.md","articles":[{"title":"工厂三兄弟之简单工厂模式（一）","level":"1.3.1.1","depth":3,"path":"工厂三兄弟之简单工厂模式（一）.md","ref":"工厂三兄弟之简单工厂模式（一）.md","articles":[]},{"title":"工厂三兄弟之简单工厂模式（二）","level":"1.3.1.2","depth":3,"path":"工厂三兄弟之简单工厂模式（二）.md","ref":"工厂三兄弟之简单工厂模式（二）.md","articles":[]},{"title":"工厂三兄弟之简单工厂模式（三）","level":"1.3.1.3","depth":3,"path":"工厂三兄弟之简单工厂模式（三）.md","ref":"工厂三兄弟之简单工厂模式（三）.md","articles":[]},{"title":"工厂三兄弟之简单工厂模式（四）","level":"1.3.1.4","depth":3,"path":"工厂三兄弟之简单工厂模式（四）.md","ref":"工厂三兄弟之简单工厂模式（四）.md","articles":[]}]},{"title":"工厂方法模式-Factory Method Pattern","level":"1.3.2","depth":2,"path":"工厂方法模式-Factory Method Pattern.md","ref":"工厂方法模式-Factory Method Pattern.md","articles":[{"title":"工厂三兄弟之工厂方法模式（一）","level":"1.3.2.1","depth":3,"path":"工厂三兄弟之工厂方法模式（一）.md","ref":"工厂三兄弟之工厂方法模式（一）.md","articles":[]},{"title":"工厂三兄弟之工厂方法模式（二）","level":"1.3.2.2","depth":3,"path":"工厂三兄弟之工厂方法模式（二）.md","ref":"工厂三兄弟之工厂方法模式（二）.md","articles":[]},{"title":"工厂三兄弟之工厂方法模式（三）","level":"1.3.2.3","depth":3,"path":"工厂三兄弟之工厂方法模式（三）.md","ref":"工厂三兄弟之工厂方法模式（三）.md","articles":[]},{"title":"工厂三兄弟之工厂方法模式（四）","level":"1.3.2.4","depth":3,"path":"工厂三兄弟之工厂方法模式（四）.md","ref":"工厂三兄弟之工厂方法模式（四）.md","articles":[]}]},{"title":"抽象工厂模式-Abstract  Factory Pattern","level":"1.3.3","depth":2,"path":"抽象工厂模式-Abstract  Factory Pattern.md","ref":"抽象工厂模式-Abstract  Factory Pattern.md","articles":[{"title":"工厂三兄弟之抽象工厂模式（一）","level":"1.3.3.1","depth":3,"path":"工厂三兄弟之抽象工厂模式（一）.md","ref":"工厂三兄弟之抽象工厂模式（一）.md","articles":[]},{"title":"工厂三兄弟之抽象工厂模式（二）","level":"1.3.3.2","depth":3,"path":"工厂三兄弟之抽象工厂模式（二）.md","ref":"工厂三兄弟之抽象工厂模式（二）.md","articles":[]},{"title":"工厂三兄弟之抽象工厂模式（三）","level":"1.3.3.3","depth":3,"path":"工厂三兄弟之抽象工厂模式（三）.md","ref":"工厂三兄弟之抽象工厂模式（三）.md","articles":[]},{"title":"工厂三兄弟之抽象工厂模式（四）","level":"1.3.3.4","depth":3,"path":"工厂三兄弟之抽象工厂模式（四）.md","ref":"工厂三兄弟之抽象工厂模式（四）.md","articles":[]},{"title":"工厂三兄弟之抽象工厂模式（五）","level":"1.3.3.5","depth":3,"path":"工厂三兄弟之抽象工厂模式（五）.md","ref":"工厂三兄弟之抽象工厂模式（五）.md","articles":[]}]},{"title":"单例模式-Singleton Pattern","level":"1.3.4","depth":2,"path":"单例模式-Singleton Pattern.md","ref":"单例模式-Singleton Pattern.md","articles":[{"title":"确保对象的唯一性——单例模式 （一）","level":"1.3.4.1","depth":3,"path":"确保对象的唯一性——单例模式 （一）.md","ref":"确保对象的唯一性——单例模式 （一）.md","articles":[]},{"title":"确保对象的唯一性——单例模式 （二）","level":"1.3.4.2","depth":3,"path":"确保对象的唯一性——单例模式 （二）.md","ref":"确保对象的唯一性——单例模式 （二）.md","articles":[]},{"title":"确保对象的唯一性——单例模式 （三）","level":"1.3.4.3","depth":3,"path":"确保对象的唯一性——单例模式 （三）.md","ref":"确保对象的唯一性——单例模式 （三）.md","articles":[]},{"title":"确保对象的唯一性——单例模式 （四）","level":"1.3.4.4","depth":3,"path":"确保对象的唯一性——单例模式 （四）.md","ref":"确保对象的唯一性——单例模式 （四）.md","articles":[]},{"title":"确保对象的唯一性——单例模式 （五）","level":"1.3.4.5","depth":3,"path":"确保对象的唯一性——单例模式 （五）.md","ref":"确保对象的唯一性——单例模式 （五）.md","articles":[]}]},{"title":"原型模式-Prototype Pattern","level":"1.3.5","depth":2,"path":"原型模式-Prototype Pattern.md","ref":"原型模式-Prototype Pattern.md","articles":[{"title":"对象的克隆——原型模式（一）","level":"1.3.5.1","depth":3,"path":"对象的克隆——原型模式（一）.md","ref":"对象的克隆——原型模式（一）.md","articles":[]},{"title":"对象的克隆——原型模式（二）","level":"1.3.5.2","depth":3,"path":"对象的克隆——原型模式（二）.md","ref":"对象的克隆——原型模式（二）.md","articles":[]},{"title":"对象的克隆——原型模式（三）","level":"1.3.5.3","depth":3,"path":"对象的克隆——原型模式（三）.md","ref":"对象的克隆——原型模式（三）.md","articles":[]},{"title":"对象的克隆——原型模式（四）","level":"1.3.5.4","depth":3,"path":"对象的克隆——原型模式（四）.md","ref":"对象的克隆——原型模式（四）.md","articles":[]}]},{"title":"建造者模式-Builder Pattern","level":"1.3.6","depth":2,"path":"建造者模式-Builder Pattern.md","ref":"建造者模式-Builder Pattern.md","articles":[{"title":"复杂对象的组装与创建——建造者模式（一）","level":"1.3.6.1","depth":3,"path":"复杂对象的组装与创建——建造者模式（一）.md","ref":"复杂对象的组装与创建——建造者模式（一）.md","articles":[]},{"title":"复杂对象的组装与创建——建造者模式（二）","level":"1.3.6.2","depth":3,"path":"复杂对象的组装与创建——建造者模式（二）.md","ref":"复杂对象的组装与创建——建造者模式（二）.md","articles":[]},{"title":"复杂对象的组装与创建——建造者模式（三）","level":"1.3.6.3","depth":3,"path":"复杂对象的组装与创建——建造者模式（三）.md","ref":"复杂对象的组装与创建——建造者模式（三）.md","articles":[]}]}]},"previous":{"title":"面向对象设计原则之合成复用原则","level":"1.2.2.6","depth":3,"path":"面向对象设计原则之合成复用原则.md","ref":"面向对象设计原则之合成复用原则.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","ga","comment"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/quanke/design-pattern-java"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-82833335-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"comment":{"highlightCommented":true}},"github":"quanke/design-pattern-java","theme":"default","author":"quanke","pdf":{"pageNumbers":true,"fontSize":16,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"设计模式Java版","language":"zh","links":{"sidebar":{"设计模式Java版":"https://www.gitbook.com/book/quanke/design-pattern-java"},"gitbook":true},"gitbook":"*","description":"刘伟大神写的设计模式"},"file":{"path":"面向对象设计原则之迪米特法则.md","mtime":"2016-11-28T02:18:46.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-28T02:18:51.842Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/gitbook.js.下载"></script>
+    <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/theme.js.下载"></script>
+    
+        
+        <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/plugin.js.下载"></script>
+        
+    
+        
+        <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/plugin.js(1).下载"></script>
+        
+    
+        
+        <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/plugin.js(2).下载"></script>
+        
+    
+        
+        <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/search-engine.js.下载"></script>
+        
+    
+        
+        <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/search.js.下载"></script>
+        
+    
+        
+        <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/lunr.min.js.下载"></script>
+        
+    
+        
+        <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/search-lunr.js.下载"></script>
+        
+    
+        
+        <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/buttons.js.下载"></script>
+        
+    
+        
+        <script src="./面向对象设计原则之迪米特法则 · 设计模式Java版_files/fontsettings.js.下载"></script>
+        
+    
+
+    
+<div><script style="display: none;" type="application/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57505611-7', 'auto', {name: 'microcdn'});
+  ga('microcdn.send', 'pageview');
+
+  var _cdn_prev_loc = window.location.pathname;
+  window.setInterval(function () {
+    if (window.location.pathname !== _cdn_prev_loc) {
+      _cdn_prev_loc = window.location.pathname;
+      ga('microcdn.send', 'pageview');
+    }
+  }, 100);
+
+</script></div>
+
+
+
+</body></html>
