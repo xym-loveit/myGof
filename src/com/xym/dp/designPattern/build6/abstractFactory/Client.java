@@ -9,6 +9,8 @@ package com.xym.dp.designPattern.build6.abstractFactory;
  * <p>
  * 产品等级是同一类事物的统称（如海尔电视机、长虹电视剧、TCL电视机等）
  * <p>
+ * 产品族的扩展很方便，但如果想添加产品等级则需要修改之前的代码，会破坏开闭原则
+ * <p>
  * 这种模式下的创建可以使用抽象工厂模式
  *
  * @author xym
